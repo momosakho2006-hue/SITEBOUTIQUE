@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferme Avicole - Mon Panier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>Ferme Avicole Moderne</h1>
+            <span class="tagline">Élevage sain & naturel</span>
+        </div>
+        <nav>
+            <a href="index.html">Vente au Détail</a>
+            <a href="lots.html">Vente par Lots</a>
+            <a href="panier.html" class="active">Mon Panier <span id="cart-count" class="badge">0</span></a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="page-title">Finalisation de votre commande</h2>
+
+        <div class="grid-2-cols">
+            <div class="box">
+                <h3>Articles sélectionnés</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Type</th>
+                            <th>Prix Unit.</th>
+                            <th>Qté</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items"></tbody>
+                </table>
+                <h3 class="total-row">
+                    Total à payer : <span id="cart-total">0 FCFA</span>
+                </h3>
+            </div>
+
+            <div class="box">
+                <h3>Informations & Paiement</h3>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="client-name">Nom complet *</label>
+                        <input type="text" id="client-name" required placeholder="Ex: Moussa Diop">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-phone">Numéro de téléphone *</label>
+                        <input type="tel" id="client-phone" required placeholder="Ex: 77 000 00 00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-address">Adresse (si livraison)</label>
+                        <input type="text" id="client-address" placeholder="Quartier, rue, repère...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mode de règlement *</label>
+                        
+                        <label class="payment-option wave">
+                            <input type="radio" name="payment" value="Wave" required onchange="toggleWaveInfo()">
+                            <span><strong>Paiement Mobile Wave</strong></span>
+                        </label>
+
+                        <div id="wave-details" class="wave-info">
+                            Veuillez effectuer le transfert Wave au <strong>77 123 45 67</strong>. Indiquez la référence de transaction ci-dessous :
+                            <input type="text" id="wave-ref" placeholder="ID Transaction Wave (Optionnel)">
+                        </div>
+
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="Récupération sur place" onchange="toggleWaveInfo()">
+                            <span>Paiement à la récupération auprès du vendeur</span>
+                        </label>
+
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="Paiement à la livraison" onchange="toggleWaveInfo()">
+                            <span>Paiement lors de la livraison</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn">Valider la commande</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="box history-section">
+            <div class="section-header">
+                <h3>Historique de mes achats</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° Commande</th>
+                        <th>Date</th>
+                        <th>Articles achetés</th>
+                        <th>Total</th>
+                        <th>Paiement</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody id="client-history-list"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

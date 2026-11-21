@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Gérant - Administration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="admin-nav">
+        <div class="logo-area">
+            <h1>Espace Gérant - Administration</h1>
+            <span class="tagline">Gestion des stocks et des ventes</span>
+        </div>
+        <nav>
+            <a href="index.html">Boutique Détail</a>
+            <a href="lots.html">Boutique Lots</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Commandes en attente</span>
+                <strong class="stat-value warning" id="stat-pending">0</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Ventes terminées</span>
+                <strong class="stat-value success" id="stat-completed">0</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Chiffre d'Affaires Validé</span>
+                <strong class="stat-value primary" id="stat-revenue">0 FCFA</strong>
+            </div>
+        </div>
+
+        <div class="grid-2-cols">
+            <div class="box">
+                <h3 id="form-title">Ajouter une volaille ou un lot</h3>
+                <form id="add-product-form">
+                    <input type="hidden" id="edit-product-id">
+
+                    <div class="form-group">
+                        <label for="prod-type">Type de vente (Page d'affichage) *</label>
+                        <select id="prod-type" required>
+                            <option value="detail">Vente au Détail (À l'unité)</option>
+                            <option value="lot">Vente par Lot (Grossiste / Éleveur)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-name">Nom du produit / Lot *</label>
+                        <input type="text" id="prod-name" required placeholder="Ex: Lot de 50 poussins chair">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-category">Catégorie *</label>
+                        <select id="prod-category" required>
+                            <option value="Poulet de chair">Poulet de chair</option>
+                            <option value="Poulet local">Poulet local</option>
+                            <option value="Poulet Rainbow">Poulet Rainbow</option>
+                            <option value="Poussins">Poussins (par lot)</option>
+                            <option value="Caille">Caille</option>
+                            <option value="Ornement">Poule d'ornement</option>
+                            <option value="Canard">Canard</option>
+                            <option value="Dinde">Dinde</option>
+                            <option value="Pintade">Pintade</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-price">Prix (en FCFA) *</label>
+                        <input type="number" id="prod-price" required placeholder="Ex: 3500">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-img-file">Choisir une photo dans la galerie (Optionnel lors d'une modification)</label>
+                        <input type="file" id="prod-img-file" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-desc">Description (poids, âge, taille du lot) *</label>
+                        <input type="text" id="prod-desc" required placeholder="Ex: Poids moyen 2.2 kg, prêt à abattre">
+                    </div>
+
+                    <button type="submit" class="btn" id="submit-prod-btn">Ajouter au catalogue</button>
+                    <button type="button" class="btn btn-cancel" id="cancel-edit-btn" onclick="cancelEdit()">Annuler la modification</button>
+                </form>
+            </div>
+
+            <div class="box">
+                <h3>Catalogue Actuel</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Nom</th>
+                            <th>Page</th>
+                            <th>Prix</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-products-list"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="box orders-section">
+            <h3>Commandes Clients à Traiter (En attente)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° / Date</th>
+                        <th>Client & Contact</th>
+                        <th>Détails Commande</th>
+                        <th>Total</th>
+                        <th>Paiement</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-pending-orders"></tbody>
+            </table>
+        </div>
+
+        <div class="box history-section">
+            <div class="section-header">
+                <h3>Historique des Ventes Effectuées</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° / Date</th>
+                        <th>Client</th>
+                        <th>Volailles vendues</th>
+                        <th>Montant</th>
+                        <th>Mode de paiement</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-sales-history"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
